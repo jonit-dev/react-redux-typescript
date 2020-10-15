@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface IProps {}
+
+interface IState {
+  counter: number;
+}
+
+class App extends Component<IProps, IState> {
+  // can be specified by using IState or just by using the shorthand state constructor (state = {counter: 0}). This last one will set the state automatically!
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+      counter: 0,
+    };
+  }
+
+  public onIncrement = (): void => {
+    this.setState({ counter: this.state.counter + 1 });
+  };
+  public onDecrement = (): void => {
+    this.setState({
+      counter: this.state.counter - 1,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <div>Counter: {this.state.counter}</div>
+        <br />
+        <button onClick={this.onIncrement}>Increment</button>
+        <button onClick={this.onDecrement}>Decrement</button>
+      </div>
+    );
+  }
 }
 
 export default App;
